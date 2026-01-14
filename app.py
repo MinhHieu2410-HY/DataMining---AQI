@@ -87,16 +87,20 @@ rf = train_model(X, y)
 # ======================
 # USER INPUT
 # ======================
-st.sidebar.header("📥 Nhập thông số môi trường")
+st.subheader("📥 Nhập thông số môi trường")
 
+cols = st.columns(2)
 input_data = {}
-for col in X.columns:
-    input_data[col] = st.sidebar.number_input(
-        col,
-        value=float(X[col].mean())
-    )
+
+for i, col in enumerate(X.columns):
+    with cols[i % 2]:
+        input_data[col] = st.number_input(
+            col,
+            value=float(X[col].mean())
+        )
 
 input_df = pd.DataFrame([input_data])
+
 
 # ======================
 # PREDICTION
